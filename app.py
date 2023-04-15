@@ -3,7 +3,6 @@
 import streamlit as st
 from langchain.vectorstores import Chroma
 from langchain.embeddings import OpenAIEmbeddings
-from langchain.document_loaders import CSVLoader
 from langchain.chat_models import ChatOpenAI
 from langchain.prompts import (
     ChatPromptTemplate,
@@ -42,9 +41,7 @@ def check_password():
 if check_password():
   chat = ChatOpenAI(temperature=0, model_name="gpt-3.5-turbo")
 
-  # Load text
-  loader = CSVLoader('MPOGConceptAllMaybeNoNumbers.csv')
-  data = loader.load()
+  # Load vectorstore
 
   persist_directory = 'db'
   embedding = OpenAIEmbeddings()
@@ -60,6 +57,7 @@ if check_password():
       template="""You are a helpful assistant that tells a researcher whether their idea is appropriate given the data in the MPOG database.
       The MPOG database contains the following data elements that may be relevant to the researcher's ideas.
       {context}
+      Additionally, patient demographics like age, race, gender, and BMI (body mass index) are available.
       Respond first by indicating whether the data in MPOG seems appropriate for the researcher’s idea. The first word in your response should be “Yes” or “No.” If their idea is not reasonable given the data in MPOG, explain what data elements that they might need are not in MPOG.
 
       If their idea is reasonable given the data in MPOG, briefly do the following 
