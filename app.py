@@ -1,7 +1,7 @@
 # streamlit_app.py
 
 import streamlit as st
-from langchain.vectorstores import Chroma
+from langchain.vectorstores import FAISS
 from langchain.embeddings import OpenAIEmbeddings
 from langchain.chat_models import ChatOpenAI
 from langchain.prompts import (
@@ -43,10 +43,9 @@ if check_password():
 
   # Load vectorstore
 
-  persist_directory = 'db'
   embedding = OpenAIEmbeddings()
 
-  vectordb = Chroma(persist_directory=persist_directory, embedding_function=embedding)
+  vectordb = FAISS.load_local("faiss_index", embedding)
   docsearch = vectordb.as_retriever()
 
   query = st.text_input("Enter your research question:")
