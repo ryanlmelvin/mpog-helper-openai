@@ -3,7 +3,6 @@
 import streamlit as st
 from langchain.vectorstores import Chroma
 from langchain.embeddings import OpenAIEmbeddings
-from langchain.document_loaders import CSVLoader
 from langchain.chat_models import ChatOpenAI
 from langchain.prompts import (
     ChatPromptTemplate,
@@ -42,9 +41,7 @@ def check_password():
 if check_password():
   chat = ChatOpenAI(temperature=0, model_name="gpt-3.5-turbo")
 
-  # Load text
-  loader = CSVLoader('MPOGConceptAllMaybeNoNumbers.csv')
-  data = loader.load()
+  # Load vectorstore
 
   persist_directory = 'db'
   embedding = OpenAIEmbeddings()
