@@ -21,7 +21,7 @@ hide_streamlit_style = """
             """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True) 
 
-st.title("🗄️ MPOG Feasibility Checker 🤖")
+st.title("🗃️ MPOG Feasibility Checker 🤖")
 st.write("Brought to you by the Anesthesiology MPOG Steering Committee, Informatics, and Data Science teams")
 st.write("Not affiliated with MPOG. Uses external resources. Not approved for use with PHI or sensitive data.")
 st.sidebar.write("**Generative AIs are not reliable for factual information.")
